@@ -4,8 +4,13 @@ class Api::V1::UsersController < ApplicationController
         if @user.valid?
             render json: { user: UserSerializer.new(@user) }, status: :created
         else
-            render json: { error: 'faile to create user'}, status: :not_acceptable
+            render json: { error: 'failed to create user'}, status: :not_acceptable
         end
+    end
+
+    def index
+        @users = User.all
+        render json: @users
     end
 
     private
